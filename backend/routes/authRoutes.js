@@ -47,7 +47,7 @@ router.get(
   "/google/callback",
   passport.authenticate("google", {
     session: false,
-    failureRedirect: "https://the-daily-ledger-site.netlify.app/login",
+   failureRedirect: `${process.env.CLIENT_URL}/login`,
   }),
   async (req, res) => {
     try {
@@ -71,7 +71,7 @@ router.get(
       };
 
       res.redirect(
-        `https://the-daily-ledger-site.netlify.app/google-success?token=${token}&user=${encodeURIComponent(
+        `${process.env.CLIENT_URL}/google-success?token=${token}&user=${encodeURIComponent(
           JSON.stringify(user),
         )}`,
       );
