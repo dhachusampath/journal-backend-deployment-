@@ -22,19 +22,21 @@ const app = express();
 
 connectDB();
 
-<<<<<<< HEAD
-app.use(cors({
-  origin: process.env.CLIENT_URL,
-  credentials: true
-}));
-=======
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
     credentials: true,
   }),
 );
->>>>>>> 6b3dbdc (Remove .env from repository)
+
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  }),
+);
+
+app.use(cors());
 
 app.use(express.json());
 

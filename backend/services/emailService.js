@@ -1,15 +1,19 @@
-const { Resend } = require("resend");
+const nodemailer = require("nodemailer");
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Configure nodemailer
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
+  },
+});
 
 // Send OTP email
 const sendOTPEmail = async (email, otp, name = "User") => {
   try {
-    const { data, error } = await resend.emails.send({
-      // Use "onboarding@resend.dev" for immediate testing without domain verification.
-      // Once you verify your own domain in Resend's dashboard, switch this to
-      // something like "noreply@yourdomain.com"
-      from: "onboarding@resend.dev",
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
       to: email,
       subject: "Password Reset OTP - Your Authentication Code",
       html: `
@@ -26,16 +30,9 @@ const sendOTPEmail = async (email, otp, name = "User") => {
           <p style="color: #888; font-size: 12px; text-align: center;">This is an automated message, please do not reply.</p>
         </div>
       `,
-    });
+    };
 
-    if (error) {
-      // Resend returns errors as a field on the response instead of throwing,
-      // so we have to check for it explicitly and throw ourselves
-      console.error("Resend API error:", error);
-      throw new Error("Failed to send OTP email");
-    }
-
-    console.log("OTP email sent, id:", data?.id);
+    await transporter.sendMail(mailOptions);
     return true;
   } catch (error) {
     console.error("Email sending error:", error);
