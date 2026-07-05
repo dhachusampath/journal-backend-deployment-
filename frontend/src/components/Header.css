@@ -1,0 +1,252 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.ledger-header {
+  width: 100%;
+  height: 85px;
+  background: var(--ledger-ink, #17130f);
+  border-bottom: 2px solid var(--ledger-red, #b3261e);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* BRAND */
+.ledger-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.ledger-header-mark {
+  color: var(--ledger-red, #b3261e);
+  font-size: 22px;
+  line-height: 0;
+}
+
+.ledger-header-name {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  font-size: 21px;
+  color: var(--ledger-paper, #f6f3ea);
+  letter-spacing: 0.01em;
+}
+
+/* NAV */
+.ledger-header-nav {
+  display: flex;
+  align-items: center;
+  gap: 38px;
+}
+
+.ledger-header-nav a {
+  color: var(--ledger-paper, #f6f3ea);
+  text-decoration: none;
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.ledger-header-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1.5px;
+  background: var(--ledger-red, #b3261e);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.25s ease;
+}
+
+.ledger-header-nav a:hover::after {
+  transform: scaleX(1);
+}
+
+/* AUTH BUTTONS — outline-then-fill, matches the rest of the site */
+.ledger-header-auth-desktop,
+.ledger-header-user-desktop {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ledger-header-login {
+  background: transparent;
+  color: var(--ledger-paper, #f6f3ea);
+  border: 1.5px solid rgba(246, 243, 234, 0.4);
+  border-radius: 2px;
+  padding: 9px 22px;
+  font-family: "Inter", sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.ledger-header-login:hover {
+  border-color: var(--ledger-paper, #f6f3ea);
+  background: rgba(246, 243, 234, 0.08);
+}
+
+.ledger-header-signup {
+  background: var(--ledger-red, #b3261e);
+  color: var(--ledger-paper, #f6f3ea);
+  border: 1.5px solid var(--ledger-red, #b3261e);
+  border-radius: 2px;
+  padding: 9px 22px;
+  font-family: "Inter", sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+}
+
+.ledger-header-signup:hover {
+  opacity: 0.85;
+}
+
+.ledger-header-logout {
+  background: transparent;
+  color: var(--ledger-red, #b3261e);
+  border: 1.5px solid var(--ledger-red, #b3261e);
+  border-radius: 2px;
+  padding: 9px 20px;
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.ledger-header-logout:hover {
+  background: var(--ledger-red, #b3261e);
+  color: var(--ledger-paper, #f6f3ea);
+}
+
+/* AVATAR — initials fallback instead of a third-party placeholder image */
+.ledger-header-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.ledger-header-avatar--fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ledger-red, #b3261e);
+  color: var(--ledger-paper, #f6f3ea);
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ledger-header-username {
+  font-family: "Inter", sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ledger-paper, #f6f3ea);
+}
+
+/* HAMBURGER */
+.ledger-header-hamburger {
+  display: none;
+  background: none;
+  color: var(--ledger-paper, #f6f3ea);
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.ledger-header-auth-mobile,
+.ledger-header-user-mobile {
+  display: none;
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 992px) {
+  .ledger-header-auth-desktop,
+  .ledger-header-user-desktop {
+    display: none;
+  }
+
+  .ledger-header-hamburger {
+    display: block;
+  }
+
+  .ledger-header-nav {
+    position: fixed;
+    top: 85px;
+    left: -100%;
+    width: 260px;
+    height: calc(100vh - 85px);
+    background: var(--ledger-ink, #17130f);
+    border-right: 1px solid rgba(246, 243, 234, 0.15);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 40px 30px;
+    gap: 28px;
+    transition: left 0.35s ease;
+  }
+
+  .ledger-header-nav.active {
+    left: 0;
+  }
+
+  .ledger-header-auth-mobile,
+  .ledger-header-user-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-top: 10px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(246, 243, 234, 0.15);
+    width: 100%;
+  }
+
+  .ledger-header-user-mobile {
+    align-items: center;
+    text-align: center;
+  }
+
+  .ledger-header-login,
+  .ledger-header-signup {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .ledger-header {
+    padding: 0 20px;
+  }
+
+  .ledger-header-name {
+    font-size: 18px;
+  }
+
+  .ledger-header-avatar {
+    width: 36px;
+    height: 36px;
+  }
+}
