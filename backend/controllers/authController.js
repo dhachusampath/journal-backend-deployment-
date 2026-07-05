@@ -279,7 +279,7 @@ exports.resendOTP = async (req, res) => {
     // Update OTP
     user.resetPasswordOTP = otp;
     user.resetPasswordOTPExpires = expires;
-    ac;
+  
     await user.save();
     // Send new OTP
     await sendOTPEmail(email, otp, user.name);
