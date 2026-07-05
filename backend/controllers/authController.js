@@ -279,7 +279,11 @@ exports.resendOTP = async (req, res) => {
     // Update OTP
     user.resetPasswordOTP = otp;
     user.resetPasswordOTPExpires = expires;
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 6b3dbdc (Remove .env from repository)
     await user.save();
     // Send new OTP
     await sendOTPEmail(email, otp, user.name);
