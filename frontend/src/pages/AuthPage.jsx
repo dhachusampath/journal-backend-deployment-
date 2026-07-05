@@ -16,7 +16,6 @@ const AuthPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
   const { loading, error: reduxError } = useSelector((state) => state.auth);
 
   const [isRegisterMode, setIsRegisterMode] = useState(false);
@@ -31,7 +30,6 @@ const AuthPage = () => {
   const [otp, setOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [resetToken, setResetToken] = useState("");
-
 
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -353,7 +351,7 @@ const AuthPage = () => {
                       }}
                       onClick={() => {
                         window.location.href =
-                          "http://localhost:5000/api/auth/google";
+                          "https://journal-backend-2i4l.onrender.com/api/auth/google";
                       }}
                     >
                       Continue with Google

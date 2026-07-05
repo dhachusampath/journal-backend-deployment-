@@ -102,67 +102,67 @@ const NewsPage = () => {
   // Lock background scroll while a modal is open. Without this, on mobile
   // the page behind can capture swipe gestures meant for the modal,
   // which is a common cause of "scrolling doesn't work" reports.
-// Lock background scroll while a modal is open - Fixed for mobile scrolling
-useEffect(() => {
-  const modalOpen = showArticleForm || showJournalForm;
+  // Lock background scroll while a modal is open - Fixed for mobile scrolling
+  useEffect(() => {
+    const modalOpen = showArticleForm || showJournalForm;
 
-  if (modalOpen) {
-    // Store current scroll position
-    const scrollY = window.scrollY;
-    
-    // Lock the body scroll but allow the modal to scroll
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.width = "100%";
-    document.body.style.overflow = "hidden";
-    document.body.style.height = "100%";
-    
-    // Ensure the modal overlay is scrollable
-    const overlay = document.querySelector('.news-form-overlay');
-    if (overlay) {
-      overlay.style.overflowY = "auto";
-      overlay.style.height = "100vh";
-      overlay.style.height = "100dvh";
-      overlay.style.webkitOverflowScrolling = "touch";
-    }
-  } else {
-    // Restore scroll position when modal closes
-    const scrollY = document.body.style.top;
-    document.body.style.position = "";
-    document.body.style.top = "";
-    document.body.style.width = "";
-    document.body.style.overflow = "";
-    document.body.style.height = "";
-    
-    // Reset overlay styles
-    const overlay = document.querySelector('.news-form-overlay');
-    if (overlay) {
-      overlay.style.overflowY = "";
-      overlay.style.height = "";
-      overlay.style.webkitOverflowScrolling = "";
-    }
-    
-    if (scrollY) {
-      window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
-    }
-  }
+    if (modalOpen) {
+      // Store current scroll position
+      const scrollY = window.scrollY;
 
-  return () => {
-    // Cleanup
-    document.body.style.position = "";
-    document.body.style.top = "";
-    document.body.style.width = "";
-    document.body.style.overflow = "";
-    document.body.style.height = "";
-    
-    const overlay = document.querySelector('.news-form-overlay');
-    if (overlay) {
-      overlay.style.overflowY = "";
-      overlay.style.height = "";
-      overlay.style.webkitOverflowScrolling = "";
+      // Lock the body scroll but allow the modal to scroll
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+      document.body.style.overflow = "hidden";
+      document.body.style.height = "100%";
+
+      // Ensure the modal overlay is scrollable
+      const overlay = document.querySelector(".news-form-overlay");
+      if (overlay) {
+        overlay.style.overflowY = "auto";
+        overlay.style.height = "100vh";
+        overlay.style.height = "100dvh";
+        overlay.style.webkitOverflowScrolling = "touch";
+      }
+    } else {
+      // Restore scroll position when modal closes
+      const scrollY = document.body.style.top;
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.height = "";
+
+      // Reset overlay styles
+      const overlay = document.querySelector(".news-form-overlay");
+      if (overlay) {
+        overlay.style.overflowY = "";
+        overlay.style.height = "";
+        overlay.style.webkitOverflowScrolling = "";
+      }
+
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
+      }
     }
-  };
-}, [showArticleForm, showJournalForm]);
+
+    return () => {
+      // Cleanup
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
+      document.body.style.height = "";
+
+      const overlay = document.querySelector(".news-form-overlay");
+      if (overlay) {
+        overlay.style.overflowY = "";
+        overlay.style.height = "";
+        overlay.style.webkitOverflowScrolling = "";
+      }
+    };
+  }, [showArticleForm, showJournalForm]);
   const openCreateArticle = () => {
     setEditingArticleId(null);
     setArticleForm(emptyArticleForm);

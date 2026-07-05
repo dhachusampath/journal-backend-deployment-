@@ -21,7 +21,7 @@ export default function Header() {
       if (!token) return;
 
       const response = await axios.get(
-        "http://localhost:5000/api/auth/profile",
+        "https://journal-backend-2i4l.onrender.com/api/auth/profile",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -59,7 +59,7 @@ export default function Header() {
     if (user?.profileImage) {
       const imageUrl = user.profileImage.startsWith("http")
         ? user.profileImage
-        : `http://localhost:5000/uploads/${user.profileImage}`;
+        : `https://journal-backend-2i4l.onrender.com/uploads/${user.profileImage}`;
 
       return (
         <img src={imageUrl} alt={user.name} className="ledger-header-avatar" />
