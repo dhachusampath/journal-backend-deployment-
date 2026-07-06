@@ -110,6 +110,12 @@ exports.getProfile = async (req, res) => {
 };
 // Forgot Password - Send OTP
 exports.forgotPassword = async (req, res) => {
+
+  console.log(req.body);
+
+console.log(process.env.EMAIL_USER);
+
+console.log(process.env.EMAIL_PASSWORD);
   try {
     const { email } = req.body;
 
